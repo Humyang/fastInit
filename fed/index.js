@@ -26,15 +26,15 @@ $(function(){
         theme: "3024-day",
         extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
     });
-    // console.log(editor)
-    var code_mirror = document.getElementsByClassName('CodeMirror')[0]
-    code_mirror.style.height = window.innerHeight - 106 + "px"
-    window.onresize = function() {
-        code_mirror.style.height = window.innerHeight - 106 + "px"
-    }
-    var input = document.getElementById("select");
-    function selectTheme() {
-        var theme = input.options[input.selectedIndex].textContent;
-        editor.setOption("theme", theme);
-    }
+    // // console.log(editor)
+    // var code_mirror = document.getElementsByClassName('CodeMirror')[0]
+    // code_mirror.style.height = window.innerHeight - 106 + "px"
+    // window.onresize = function() {
+    //     code_mirror.style.height = window.innerHeight - 106 + "px"
+    // }
+    // var input = document.getElementById("select");
+    // function selectTheme() {
+    //     var theme = input.options[input.selectedIndex].textContent;
+    //     editor.setOption("theme", theme);
+    // }
 })
