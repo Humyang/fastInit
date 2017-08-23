@@ -10,21 +10,20 @@ async function pathToJSON(path){
 	let current = await loadDir(path)
 	// 检测目录是否文件夹
 	for(i in current){
+
 		var dataObj = {}
-		let status = await stat(path+'/'+current[i])
-		// console.log(path+'/'+current[i])
-		// console.log()
+		let current_path = path+'/'+current[i]
+		let status = await stat(current_path)
+
 		dataObj.name = current[i]
+
 		if(status.isDirectory()){
 			dataObj.type = "floder"
-			dataObj.template = await pathToJSON(path+'/'+current[i])
-			 
-			 // push(doa)
+			dataObj.template = await pathToJSON(current_path)
 		}
-
 		if(status.isFile()){
 			dataObj.type = "file"
-			dataObj.content = '123'
+			dataObj.content = await loadfile(current_path)
 		}
 		dataObjArray.push(dataObj)
 	}
@@ -39,12 +38,17 @@ function formatSpace(deep){
 	}
 	return res
 }
-
 // 读取文件内容
-async function loadfile(){
-
+async function loadfile(path){
+	return new Promise(function(reslove,reject){
+		fs.readFile(path, 'utf8',function(err,data){
+			if(err){
+				reject(err)
+			}
+			reslove(data)
+		})
+	})
 }
-
 // 读取指定目录所有文件
 async function loadDir(path){
 	return new Promise(function(reslove,reject){
@@ -65,7 +69,7 @@ async function stat(path){
 	})
 }
 // pathToJSON(__dirname+'/../template')
-pathToJSON("C:/Users/jesse/Documents/GitHub/fastInit/vendor")
+pathToJSON("../template")
 .then(function(res){
 	debugger
 	console.log(JSON.stringify(res))
