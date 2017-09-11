@@ -13,10 +13,37 @@
 	}
 </style>
 <body>
-<textarea name="" id="ta1" cols="30" rows="10" value="">123123</textarea>
-<a href="" class="btn">分割</a>
+<div id="textarea_wrap">
+    
+<textarea name="" id="ta1" cols="30" rows="10" value=""></textarea>
+</div>
+<a href="#" class="btn" id="split">分割</a>
 <script>
 	window.onload = function(){
+
+        var btn = document.getElementById('split')
+        btn.onclick = function(event){
+            var value = ta1.value
+
+            // 获取选中位置
+            var selectionStart = ta1.selectionStart
+
+            // 分割文字
+            var sp1 = value.substr(0,selectionStart)
+            var sp2 = value.substr(selectionStart,value.length)
+
+            var nt1 = document.createElement('textarea')
+            nt1.value = sp1
+            var nt2 = document.createElement('textarea')
+            nt2.value = sp2
+
+            // console.log(sp1,'-----',sp2)
+            textarea_wrap.append(nt1)
+            textarea_wrap.append(nt2)
+            textarea_wrap.removeChild(ta1)
+            event.preventDefault()
+        }
+
 		window.Textarea = document.getElementById('ta1')
 		Textarea.value = `{
   "name": "dailys",
